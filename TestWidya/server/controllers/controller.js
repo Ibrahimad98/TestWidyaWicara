@@ -1,13 +1,15 @@
 const { Product, User } = require("../models/index");
+const { createToken, verifyToken } = require("../helpers/jwt");
+const { comparedPassword } = require("../helpers/bcrypt");
 
 class Controller {
   static async register(req, res, next) {
-    const { username, email, password, gender } = req.body;
+    const { name, email, password, gender } = req.body;
     // console.log(req.body);
     console.log("dari controller user");
     try {
       const createdUser = await User.create({
-        username,
+        name,
         email,
         password,
         gender,
@@ -17,6 +19,7 @@ class Controller {
         email: createdUser.email,
       });
     } catch (error) {
+      console.log(error);
       next(error);
     }
   }
@@ -61,6 +64,22 @@ class Controller {
     }
   }
 
+  static async findUser(req, res, next) {
+    try {
+      const { id } = req.params;
+
+      const user = await User.findByPk(id, {
+        attributes: { exclude: ["password"] },
+      });
+
+      if (!user) throw { name: "DATA_NOT_FOUND", id, data: "user" };
+
+      res.status(200).json(user);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async findAllProduct(req, res, next) {
     try {
       let data = await Product.findAll({
@@ -93,7 +112,7 @@ class Controller {
       const { name, imgUrl } = req.body;
       let foundData = await Product.findByPk(id);
 
-      if (!foundData) throw { name: "DATA_NOT_FOUND", id, data: "User" };
+      if (!foundData) throw { name: "DATA_NOT_FOUND", id, data: "Product" };
 
       let data = await Product.update(
         {
@@ -103,7 +122,7 @@ class Controller {
         { where: { id } }
       );
 
-      res.status(201).json({ message: `data with id ${foundData.id} updated!` });
+      res.status(201).json({ message: `data with id ${foundData.id} is updated!` });
     } catch (error) {
       console.log(error.name);
       next(error);
