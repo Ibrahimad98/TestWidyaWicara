@@ -53,6 +53,7 @@ class Controller {
 
       res.status(200).json({
         access_token: token,
+        name: foundUser.name,
         email: foundUser.email,
         gender: foundUser.gender,
         username: foundUser.username,
