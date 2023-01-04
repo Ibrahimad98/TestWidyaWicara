@@ -1,4 +1,3 @@
-import { useSelector, useDispatch } from "react-redux";
 import { setError } from "react";
 import { REGISTER_USER, FETCH_PRODUCTS, ISLOADING, PROFILES } from "./actionTypes";
 import { redirect } from "react-router-dom";
@@ -104,7 +103,7 @@ export const addProducts = (input) => {
       })
       .then((data) => {
         console.log("berhasil menambahkan data");
-        dispatch(fetchPost());
+        dispatch(fetchProducts());
         redirect("/");
       })
       .catch((error) => {
@@ -124,7 +123,7 @@ export const deleteProducts = (id) => {
         return res.json();
       })
       .then((data) => {
-        dispatch(fetchPost());
+        dispatch(fetchProducts());
         console.log("berhasil delete news dengan id " + id);
       })
       .catch((error) => {
@@ -149,7 +148,7 @@ export const editProducts = (id, input) => {
         return res.json();
       })
       .then((data) => {
-        dispatch(fetchCategory());
+        dispatch(fetchProducts());
       })
       .catch((error) => {
         console.log(error);

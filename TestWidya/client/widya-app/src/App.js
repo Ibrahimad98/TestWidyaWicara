@@ -1,5 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
+import "./css/style.css";
 import { RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import router from "./routes";

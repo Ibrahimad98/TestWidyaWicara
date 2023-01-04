@@ -2,24 +2,26 @@ import { FETCH_PRODUCTS, EDIT_PRODUCTS, ADD_PRODUCTS, DELETE_PRODUCTS } from "..
 
 const initialState = {
   products: {},
+  editedProducts: {},
+  newProducts: {},
 };
 
-export default function productsReducer(state = initialState, action) {
+export default function productReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_PRODUCTS:
       return {
         ...state,
         products: action.payload,
       };
-    case REGISTER_USER:
+    case EDIT_PRODUCTS:
       return {
         ...state,
-        register: action.payload,
+        editedProducts: action.payload,
       };
-    case PROFILES:
+    case ADD_PRODUCTS:
       return {
         ...state,
-        profile: action.payload,
+        newProducts: action.payload,
       };
     default:
       return state;

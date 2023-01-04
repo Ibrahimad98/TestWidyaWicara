@@ -14,20 +14,14 @@ const router = createBrowserRouter([
     loader: () => {
       if (!localStorage.access_token) {
         return redirect("/login");
+      } else {
+        return null;
       }
     },
     children: [
       {
         path: "",
         element: <Dashboard />,
-      },
-      {
-        path: "profile",
-        element: <Register />,
-      },
-      {
-        path: "register",
-        element: <Register />,
       },
       {
         path: "addProducts",
@@ -49,6 +43,19 @@ const router = createBrowserRouter([
     loader: () => {
       if (localStorage.access_token) {
         return redirect("/");
+      } else {
+        return null;
+      }
+    },
+  },
+  {
+    path: "/register",
+    element: <Register />,
+    loader: () => {
+      if (localStorage.access_token) {
+        return redirect("/");
+      } else {
+        return null;
       }
     },
   },
