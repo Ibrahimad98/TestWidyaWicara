@@ -96,6 +96,9 @@ class Controller {
     const { id } = req.params;
     try {
       let data = await Product.findByPk(id);
+
+      if (!data) throw { name: "DATA_NOT_FOUND", id, data: "Product" };
+
       res.status(200).json(data);
     } catch (error) {
       next(error);
