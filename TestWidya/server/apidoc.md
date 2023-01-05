@@ -105,7 +105,7 @@ _401 - Unauthorized_
 
 ### Description
 
-- view all products available
+- get all products available
 
 - Headers
 
@@ -114,6 +114,8 @@ _401 - Unauthorized_
   "headers": "application/x-www-form-urlencoded"
 }
 ```
+
+### Response
 
 _200 - OK_
 
@@ -132,7 +134,9 @@ _200 - OK_
 
 ### Description
 
-- view one product
+- get one product
+
+  ### Request
 
 - Headers
 
@@ -141,6 +145,16 @@ _200 - OK_
   "headers": "application/x-www-form-urlencoded"
 }
 ```
+
+- Params
+
+```json
+    {
+      "id": Integer,
+    }
+```
+
+### Response
 
 _200 - OK_
 
@@ -162,7 +176,9 @@ _200 - OK_
 
 ### Description
 
-- view one user
+- get one user
+
+  ### Request
 
 - Headers
 
@@ -171,6 +187,16 @@ _200 - OK_
   "headers": "application/x-www-form-urlencoded"
 }
 ```
+
+- Params
+
+```json
+    {
+      "id": Integer,
+    }
+```
+
+### Response
 
 _200 - OK_
 
@@ -196,6 +222,8 @@ _200 - OK_
 
 - add a product
 
+  ### Request
+
 - Headers
 
 ```json
@@ -204,9 +232,7 @@ _200 - OK_
 }
 ```
 
-### Request
-
--body
+- Body
 
 ```json
     {
@@ -228,11 +254,13 @@ _200 - Ok_
   }
   ```
 
-### DELETE /products
+### DELETE /products/:id
 
 ### Description
 
 - delete a product
+
+  ### Request
 
 - Headers
 
@@ -241,8 +269,6 @@ _200 - Ok_
   "headers": "application/x-www-form-urlencoded"
 }
 ```
-
-### Request
 
 - Params
 
@@ -270,11 +296,13 @@ _200 - Ok_
   }
   ```
 
-### PUT /products
+### PUT /products/:id
 
 ### Description
 
 - update a product
+
+### Request
 
 - Headers
 
@@ -283,8 +311,6 @@ _200 - Ok_
   "headers": "application/x-www-form-urlencoded"
 }
 ```
-
-### Request
 
 - Params
 
