@@ -92,6 +92,16 @@ class Controller {
     }
   }
 
+  static async findOneProduct(req, res, next) {
+    const { id } = req.params;
+    try {
+      let data = await Product.findByPk(id);
+      res.status(200).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async addProduct(req, res, next) {
     try {
       const { name, imgUrl } = req.body;

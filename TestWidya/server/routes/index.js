@@ -11,6 +11,8 @@ router.use(authenticator);
 
 router.get("/products", Controller.findAllProduct);
 
+router.get("/products/:id", Controller.findOneProduct);
+
 router.get("/users/:id", Controller.findUser);
 
 router.delete("/products/:id", Controller.deleteProduct);
