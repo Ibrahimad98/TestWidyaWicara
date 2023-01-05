@@ -1,19 +1,46 @@
 import { setError } from "react";
-import { REGISTER_USER, FETCH_PRODUCTS, ISLOADING, PROFILES } from "./actionTypes";
+import { REGISTER_USER, FETCH_PRODUCTS, FETCH_ONE_PRODUCTS, ISLOADING, PROFILES } from "./actionTypes";
 import { redirect } from "react-router-dom";
 const localhost = "http://localhost:3000";
 
 export const fetchProducts = () => {
   return (dispatch) => {
-    fetch(`${localhost}/products`, { headers: { access_token: localStorage.access_token } })
+    fetch(`${localhost}/products`, { headers: { access_token: sessionStorage.access_token } })
       .then((res) => {
         if (!res.ok) throw new Error("Error fetching posts");
         return res.json();
       })
       .then((data) => {
-        // console.log(data);
+        // console.log(data, "ini dataaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         dispatch({
           type: FETCH_PRODUCTS,
+          payload: data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        // dispatch(setError(error.message));
+      })
+      .finally(() => {
+        dispatch({
+          type: ISLOADING,
+          payload: false,
+        });
+      });
+  };
+};
+
+export const fetchOneProducts = (id) => {
+  return (dispatch) => {
+    fetch(`${localhost}/products/${id}`, { headers: { access_token: sessionStorage.access_token } })
+      .then((res) => {
+        if (!res.ok) throw new Error("Error fetching posts");
+        return res.json();
+      })
+      .then((data) => {
+        // console.log(data, "ini dataaaaaa By Idddddddddddddddddddddd");
+        dispatch({
+          type: FETCH_ONE_PRODUCTS,
           payload: data,
         });
       })
@@ -74,10 +101,16 @@ export const login = (input) => {
       })
       .then((data) => {
         console.log("berhasil login");
-        localStorage.setItem("access_token", data.access_token);
-        localStorage.setItem("name", data.name);
-        localStorage.setItem("email", data.email);
-        localStorage.setItem("id", data.id);
+        // localStorage.setItem("access_token", data.access_token);
+        // localStorage.setItem("name", data.name);
+        // localStorage.setItem("email", data.email);
+        // localStorage.setItem("id", data.id);
+        // localStorage.setItem("gender", data.gender);
+        sessionStorage.setItem("access_token", data.access_token);
+        sessionStorage.setItem("name", data.name);
+        sessionStorage.setItem("email", data.email);
+        sessionStorage.setItem("id", data.id);
+        sessionStorage.setItem("gender", data.gender);
       })
       .catch((error) => {
         console.log(error);
@@ -93,7 +126,7 @@ export const addProducts = (input) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        access_token: localStorage.access_token,
+        access_token: sessionStorage.access_token,
       },
       body: JSON.stringify(input),
     })
@@ -116,7 +149,7 @@ export const deleteProducts = (id) => {
   return (dispatch) => {
     return fetch(`${localhost}/products/${id}`, {
       method: "delete",
-      headers: { access_token: localStorage.access_token },
+      headers: { access_token: sessionStorage.access_token },
     })
       .then((res) => {
         if (!res.ok) throw new Error("Error deleting news");
@@ -134,12 +167,14 @@ export const deleteProducts = (id) => {
 
 export const editProducts = (id, input) => {
   return (dispatch) => {
+    console.log(id, "hello world ini id");
+    console.log(input, "hello world ini input");
     return fetch(`${localhost}/products/${id}`, {
       method: "put",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        access_token: localStorage.access_token,
+        access_token: sessionStorage.access_token,
       },
       body: JSON.stringify(input),
     })
@@ -148,7 +183,9 @@ export const editProducts = (id, input) => {
         return res.json();
       })
       .then((data) => {
+        console.log("berhasil menambahkan data");
         dispatch(fetchProducts());
+        redirect("/");
       })
       .catch((error) => {
         console.log(error);
@@ -160,7 +197,7 @@ export const findOneUser = (id) => {
   return (dispatch) => {
     return fetch(`${localhost}/users/${id}`, {
       method: "get",
-      headers: { access_token: localStorage.access_token },
+      headers: { access_token: sessionStorage.access_token },
     })
       .then((res) => {
         if (!res.ok) throw new Error("Error fetching category with id " + id);

@@ -9,9 +9,9 @@ function Register() {
 
   const [formRegister, setFormRegister] = useState({
     name: "",
+    gender: "",
     email: "",
     password: "",
-    gender: "",
   });
 
   const handleChange = (event) => {
@@ -40,7 +40,6 @@ function Register() {
         <div className="row">
           <div className="col-12 text-center">
             <h1 className="mb-3 mt-5">Register</h1>
-            <span>Admin Register</span>
           </div>
           <div className="rounded col-10 col-lg-8 offset-lg-2 my-5">
             <div className="row d-flex justify-content-center">
@@ -50,10 +49,23 @@ function Register() {
                     <h1 className="h3 mb-3 display-1">Sign up and enjoy</h1>
                     <div className="mb-3">
                       <div className="d-flex justify-content-between">
-                        <label>Username</label>
+                        <label>Name</label>
                         <label className="text-danger text-end fw-bold">*</label>
                       </div>
-                      <input value={formRegister.username} onChange={handleChange} type="text" className="form-control" id="register-username" placeholder="Enter your username ..." autoComplete="off" required name="username" />
+                      <input value={formRegister.username} onChange={handleChange} type="text" className="form-control" id="register-username" placeholder="Enter your username ..." autoComplete="off" required name="name" />
+                    </div>
+                    <div className="mb-3">
+                      <div className="d-flex justify-content-between">
+                        <label>Gender</label>
+                        <label className="text-danger text-end fw-bold">*</label>
+                      </div>
+                      <select onChange={handleChange} name="gender" id="gender" className="form-control">
+                        <option selected={true} disabled={true}>
+                          --Select Gender-
+                        </option>
+                        <option value={"male"}>male</option>
+                        <option value={"female"}>female</option>
+                      </select>
                     </div>
                     <div className="mb-3">
                       <div className="d-flex justify-content-between">
@@ -68,15 +80,6 @@ function Register() {
                         <label className="text-danger text-end fw-bold">*</label>
                       </div>
                       <input value={formRegister.password} onChange={handleChange} type="password" className="form-control" id="register-password" placeholder="Enter your password ..." autoComplete="off" required name="password" />
-                    </div>
-                    <div className="mb-3"></div>
-                    <div className="mb-3">
-                      <label>Phone Number</label>
-                      <input value={formRegister.phoneNumber} onChange={handleChange} type="number" className="form-control" id="register-phone" placeholder="Enter phone number (optional) ..." autoComplete="off" name="phoneNumber" />
-                    </div>
-                    <div className="mb-3">
-                      <label>Address</label>
-                      <textarea value={formRegister.address} onChange={handleChange} id="register-address" className="form-control" rows="3" placeholder="Enter your address (optional) ..." autoComplete="off" name="address"></textarea>
                     </div>
                     <button className="btn btn-lg btn-primary rounded-pill w-100 p-2 mt-3" type="submit">
                       Sign Up

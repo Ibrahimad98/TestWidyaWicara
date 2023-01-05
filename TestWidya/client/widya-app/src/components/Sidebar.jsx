@@ -4,7 +4,7 @@ export default function Sidebar() {
   const navigate = useNavigate();
 
   function LogOut() {
-    localStorage.clear();
+    sessionStorage.clear();
     navigate("/login");
   }
 

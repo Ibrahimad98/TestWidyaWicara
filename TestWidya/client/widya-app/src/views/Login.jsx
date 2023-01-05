@@ -65,6 +65,7 @@ function Login() {
                     Log In
                   </button>
                 </form>
+                <p className="mt-5">don't have an acoount? please <Link to={"/register"}>register</Link></p>
               </div>
             </div>
           </div>

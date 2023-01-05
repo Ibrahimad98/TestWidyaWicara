@@ -12,11 +12,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home />,
     loader: () => {
-      if (!localStorage.access_token) {
+      if (!sessionStorage.access_token) {
         return redirect("/login");
-      } else {
-        return null;
       }
+      return null;
     },
     children: [
       {
@@ -28,7 +27,7 @@ const router = createBrowserRouter([
         element: <AddForm />,
       },
       {
-        path: "editProducts",
+        path: "editProducts/:id",
         element: <EditForm />,
       },
       {
@@ -41,22 +40,20 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
     loader: () => {
-      if (localStorage.access_token) {
+      if (sessionStorage.access_token) {
         return redirect("/");
-      } else {
-        return null;
       }
+      return null;
     },
   },
   {
     path: "/register",
     element: <Register />,
     loader: () => {
-      if (localStorage.access_token) {
+      if (sessionStorage.access_token) {
         return redirect("/");
-      } else {
-        return null;
       }
+      return null;
     },
   },
 ]);

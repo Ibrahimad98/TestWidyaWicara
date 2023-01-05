@@ -5,7 +5,7 @@ import usersReducer from "./reducers/userReducer";
 import productReducer from "./reducers/productReducer";
 
 const rootReducer = combineReducers({
-  news: productReducer,
+  product: productReducer,
   user: usersReducer,
 });
 

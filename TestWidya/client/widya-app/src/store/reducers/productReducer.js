@@ -1,7 +1,8 @@
-import { FETCH_PRODUCTS, EDIT_PRODUCTS, ADD_PRODUCTS, DELETE_PRODUCTS } from "../actionReducers/actionTypes";
+import { FETCH_PRODUCTS, FETCH_ONE_PRODUCTS, EDIT_PRODUCTS, ADD_PRODUCTS, DELETE_PRODUCTS } from "../actionReducers/actionTypes";
 
 const initialState = {
-  products: {},
+  products: [],
+  productById: {},
   editedProducts: {},
   newProducts: {},
 };
@@ -12,6 +13,11 @@ export default function productReducer(state = initialState, action) {
       return {
         ...state,
         products: action.payload,
+      };
+    case FETCH_ONE_PRODUCTS:
+      return {
+        ...state,
+        productById: action.payload,
       };
     case EDIT_PRODUCTS:
       return {
