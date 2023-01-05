@@ -79,7 +79,9 @@ _200 - OK_
     "access_token": String,
     "email": String,
     "username": String,
-    "password": String
+    "password": String,
+    "gender": String,
+    "id": Integer
   }
   ```
   _400 - Bad Request_
